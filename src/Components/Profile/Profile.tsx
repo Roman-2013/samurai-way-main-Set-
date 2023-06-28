@@ -1,5 +1,6 @@
 import React from 'react';
-import s from  './Profile.module.css'
+import s from './Profile.module.css'
+import {MyPosts} from './MePosts/MyPosts';
 
  export const Profile = () => {
     return (
@@ -8,11 +9,7 @@ import s from  './Profile.module.css'
                 <img src="https://cutewallpaper.org/22/wallpaper-for-ps3-hd/1038611218.jpg" alt=""/>
             </div>
             <div>ava+description</div>
-            <div>My Post <div>New Post</div></div>
-
-            <div className={s.item}>post1</div>
-            <div className={s.item}>post2</div>
-
+            <MyPosts/>
         </div>
     )
 }
