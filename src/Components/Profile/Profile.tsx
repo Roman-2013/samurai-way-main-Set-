@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Profile.module.css'
 import {MyPosts} from './MePosts/MyPosts';
 
- export const Profile = () => {
+export const Profile = () => {
     return (
         <div className={s.content}>
             <div>
