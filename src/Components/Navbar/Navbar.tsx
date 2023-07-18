@@ -6,12 +6,15 @@ import {NavLink} from 'react-router-dom';
      console.log(classes)
     return (
         <nav className={classes.nav}>
-            <div> <NavLink className={`${classes.item} ${classes.active}`} to={'/profile'}>Profile</NavLink></div>
-            <div> <NavLink className={`${classes.item} ${classes.active}`} to={'/dialogs'}>Messages</NavLink></div>
-            <div> <NavLink className={`${classes.item} ${classes.active}`} to={'/news'}>News</NavLink></div>
-            <div> <NavLink className={`${classes.item} ${classes.active}`} to={'/music'}>Music</NavLink></div>
-            <div> <NavLink className={`${classes.item} ${classes.active}`} to={'/settings'}>Settings</NavLink></div>
-            <div> <NavLink className={`${classes.item} ${classes.active}` }  to={'/settings'} >Settings</NavLink></div>
+            <div> <NavLink className={navData=>navData.isActive?classes.active:classes.item} to={'/profile'}>Profile</NavLink></div>
+            <div> <NavLink className={navData=>navData.isActive?classes.active:classes.item} to={'/dialogs'}>Messages</NavLink></div>
+            <div> <NavLink className={navData=>navData.isActive?classes.active:classes.item} to={'/news'}>News</NavLink></div>
+            <div> <NavLink className={navData=>navData.isActive?classes.active:classes.item} to={'/music'}>Music</NavLink></div>
+            <div> <NavLink className={({isActive})=>isActive?classes.active:classes.item} to={'/settings'}>Settings</NavLink></div>
+
+
+
+
 
         </nav>
     )
