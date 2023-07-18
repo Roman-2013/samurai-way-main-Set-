@@ -5,7 +5,7 @@ import {Post} from './Posts/Post';
 export const MyPosts = () => {
     return (
         <div>
-            <div>My Post</div>
+            <div className={s.postsBlock}>My Post</div>
             <div>New Post</div>
 
             <Post message={"Hi,how are you"} like={5}/>
