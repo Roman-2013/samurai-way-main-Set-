@@ -3,11 +3,15 @@ import s from './Profile.module.css'
 import {MyPosts} from './MePosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
-export const Profile = () => {
+export type ProfilePropsType={
+    post:Array<{id: number, message: string, likesCount: number}>
+
+}
+export const Profile = (props:ProfilePropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts post={props.post} />
         </div>
     )
 }
