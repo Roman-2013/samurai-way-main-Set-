@@ -11,3 +11,17 @@
 .active{
     color: gold;
 }
+img{
+    width: 30px;
+    border-radius: 20px;
+    align-items:center;
+}
+.friends{
+    display: flex;
+    flex-direction:row;
+   align-items:flex-start;
+}
+.frend{
+
+
+}

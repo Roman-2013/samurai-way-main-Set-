@@ -2,12 +2,10 @@ import React from 'react';
 import s from './Profile.module.css'
 import {MyPosts} from './MePosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
+import {ProfilePagePropsType} from '../../App';
 
-export type ProfilePropsType={
-    post:Array<{id: number, message: string, likesCount: number}>
 
-}
-export const Profile = (props:ProfilePropsType) => {
+export const Profile = (props:ProfilePagePropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
