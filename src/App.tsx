@@ -3,8 +3,8 @@ import './App.css';
 import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {Dialogs} from './Components/Dialogs/Dialogs';
+import {Route, Routes} from 'react-router-dom';
 
 export type MessagesPagePropsType={
     messages:Array<{ id:number, message:string}>
@@ -25,7 +25,6 @@ export const App = (props: AppPropsType) => {
 
 
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar frends={props.state.messagesPage.dialogs}/>
@@ -41,10 +40,8 @@ export const App = (props: AppPropsType) => {
                                />}/>
                     </Routes>
                 </div>
-
-
             </div>
-        </BrowserRouter>
+
     );
 }
 
