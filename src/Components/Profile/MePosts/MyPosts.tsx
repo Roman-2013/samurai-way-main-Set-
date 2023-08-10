@@ -9,11 +9,13 @@ export const MyPosts = (props:ProfilePagePropsType) => {
 
     let newPostElement=useRef<HTMLTextAreaElement>()
 
+
 const addPost=()=>{
         if(newPostElement.current?.value){
             props.addPost(newPostElement.current?.value)
+            newPostElement.current.value = ''
         }
-    console.log(props.post)
+
 }
 
     return (
