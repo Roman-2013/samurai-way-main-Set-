@@ -5,12 +5,15 @@ import {ProfilePagePropsType} from '../../../App';
 
 export const MyPosts = (props:ProfilePagePropsType) => {
 
-    let postsElements=props.post.map(p=> <Post message={p.message} like={p.likesCount}/>)
+    let postsElements=props.post.map(p=> <Post key={p.id} message={p.message} like={p.likesCount}/>)
 
     let newPostElement=useRef<HTMLTextAreaElement>()
 
 const addPost=()=>{
-    alert(newPostElement.current?.value)
+        if(newPostElement.current?.value){
+            props.addPost(newPostElement.current?.value)
+        }
+    console.log(props.post)
 }
 
     return (

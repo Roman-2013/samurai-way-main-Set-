@@ -1,3 +1,6 @@
+
+
+
 export let state = {
     profilePage: {
         post: [
@@ -23,4 +26,14 @@ export let state = {
             {id: 5, message: 'Yo'},
         ]
     }
+}
+
+export let addPost=(message:string)=>{
+    let newPost={
+        id:5,
+        message,
+        likesCount:0
+
+    }
+    state.profilePage.post.push(newPost)
 }

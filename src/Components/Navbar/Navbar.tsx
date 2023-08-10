@@ -20,7 +20,7 @@ export const Navbar = (props: NavbarPropsType) => {
             <div className={classes.friends}>
                {props.frends.filter(el=>el.id <=3).map(t=>
 
-                   <div className={classes.frend}>
+                   <div key={t.id} className={classes.frend}>
                        <img src={t.image} alt=""/>{t.name}</div>
                    )}
 

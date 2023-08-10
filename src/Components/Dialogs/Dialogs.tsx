@@ -7,8 +7,8 @@ import {MessagesPagePropsType} from '../../App';
 
 
 export const Dialogs = (props:MessagesPagePropsType) => {
-    let dialodsElements=props.dialogs.map(d=><DialogItem image={d.image} name={d.name} id={d.id}/>)
-    let messagesElements=props.messages.map(m=><Message  message={m.message}/>)
+    let dialodsElements=props.dialogs.map(d=><DialogItem key={d.id} image={d.image} name={d.name} id={d.id}/>)
+    let messagesElements=props.messages.map(m=><Message key={m.id}  message={m.message}/>)
 
     let newMessage=useRef<HTMLTextAreaElement>()
     let sendMessage=()=>alert (newMessage.current?.value)
