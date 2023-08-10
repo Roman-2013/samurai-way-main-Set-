@@ -18,8 +18,9 @@ export const Navbar = (props: NavbarPropsType) => {
 
             <h2>Friends</h2>
             <div className={classes.friends}>
-               {props.frends.filter(el=>el.id <=3).map((t,index)=>
-                   <div key={index} className={classes.frend}>
+               {props.frends.filter(el=>el.id <=3).map(t=>
+
+                   <div className={classes.frend}>
                        <img src={t.image} alt=""/>{t.name}</div>
                    )}
 

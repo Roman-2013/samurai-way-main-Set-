@@ -8,36 +8,12 @@ export let state = {
     },
     messagesPage: {
         dialogs: [
-            {
-                id: 1,
-                name: 'Dimych',
-                image: 'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'
-            },
-            {
-                id: 2,
-                name: 'Andrey',
-                image: 'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'
-            },
-            {
-                id: 3,
-                name: 'Sveta',
-                image: 'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'
-            },
-            {
-                id: 4,
-                name: 'Sascha',
-                image: 'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'
-            },
-            {
-                id: 5,
-                name: 'Viktor',
-                image: 'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'
-            },
-            {
-                id: 6,
-                name: 'Valera',
-                image: 'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'
-            },
+            {id: 1, name: 'Dimych',image:'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'},
+            {id: 2, name: 'Andrey',image:'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'},
+            {id: 3, name: 'Sveta',image:'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'},
+            {id: 4, name: 'Sascha',image:'https://aniyuki.com/wp-content/uploads/2022/03/aniyuki-anime-girl-avatar-58.jpg'},
+            {id: 5, name: 'Viktor',image:'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'},
+            {id: 6, name: 'Valera',image:'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'},
         ],
         messages: [
             {id: 1, message: 'Hi'},
@@ -47,13 +23,4 @@ export let state = {
             {id: 5, message: 'Yo'},
         ]
     }
-}
-
-export let addPost = (postMessage: string) => {
-    let newPost = {
-        id: 5,
-        message: postMessage,
-        likesCount: 0,
-    };
-    state.profilePage.post.push(newPost)
 }

@@ -3,18 +3,15 @@ import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
 import {ProfilePagePropsType} from '../../../App';
 
-export const MyPosts = (props: ProfilePagePropsType) => {
+export const MyPosts = (props:ProfilePagePropsType) => {
 
-    let postsElements = props.post.map((p,index) => <Post key={index} message={p.message} like={p.likesCount}/>)
+    let postsElements=props.post.map(p=> <Post message={p.message} like={p.likesCount}/>)
 
-    let newPostElement = useRef<HTMLTextAreaElement>()
+    let newPostElement=useRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        if (newPostElement.current?.value && props.addPost) {
-            props.addPost(newPostElement.current.value)
-        }
-        console.log(props.post)
-    }
+const addPost=()=>{
+    alert(newPostElement.current?.value)
+}
 
     return (
         <div>
