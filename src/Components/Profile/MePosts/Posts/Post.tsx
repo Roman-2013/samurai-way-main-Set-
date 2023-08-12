@@ -5,7 +5,6 @@ type PostPropsType={
     like:number
 }
 export const Post = (props:PostPropsType) => {
-    console.log(props.message)
     return (
         <div>
             <div className={s.item}>{props.message}</div>

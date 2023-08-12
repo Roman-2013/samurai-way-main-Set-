@@ -5,7 +5,7 @@ import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
 import {Dialogs} from './Components/Dialogs/Dialogs';
 import {Route, Routes} from 'react-router-dom';
-import {addPost} from './redux/state';
+import {addPost, updateNewPostText} from './redux/state';
 
 export type MessagesPagePropsType = {
     messages: Array<{ id: number, message: string }>
@@ -13,10 +13,13 @@ export type MessagesPagePropsType = {
 }
 export type ProfilePagePropsType={
     post: Array<{ id: number, message: string, likesCount: number }>
-    addPost: (message: string) => void
+    addPost: () => void
+    newPostText:string
+    updateNewPostText:(newText:string)=>void
 }
 export type ProfilePropsType = {
     post: Array<{ id: number, message: string, likesCount: number }>
+    newPostText:string
 }
 export type StatePropsType = {
     profilePage: ProfilePropsType
@@ -24,7 +27,8 @@ export type StatePropsType = {
 }
 export type AppPropsType = {
     state: StatePropsType
-    addPost: (message: string) => void
+    addPost: () => void
+    updateNewPostText:(newText:string)=>void
 }
 export const App = (props: AppPropsType) => {
 
@@ -41,8 +45,13 @@ export const App = (props: AppPropsType) => {
                                messages={props.state.messagesPage.messages}
                            />}/>
                     <Route path={'/profile'}
-                           element={<Profile addPost={props.addPost} post={props.state.profilePage.post}
-                           />}/>
+                           element={<Profile
+                               updateNewPostText={props.updateNewPostText}
+                               addPost={props.addPost}
+                               newPostText={props.state.profilePage.newPostText}
+                               post={props.state.profilePage.post}
+                           />
+                    }/>
                 </Routes>
             </div>
         </div>

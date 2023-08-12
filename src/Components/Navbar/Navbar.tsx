@@ -7,7 +7,6 @@ type NavbarPropsType={
     frends:Array<{id:number, name:string, image:string}>
 }
 export const Navbar = (props: NavbarPropsType) => {
-    console.log(classes)
     return (
         <nav className={classes.nav}>
             <div><NavLink className={navData => navData.isActive ? classes.active : classes.item} to={'/profile'}>Profile</NavLink></div>

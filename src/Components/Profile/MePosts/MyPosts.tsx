@@ -3,25 +3,31 @@ import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
 import {ProfilePagePropsType} from '../../../App';
 
-export const MyPosts = (props:ProfilePagePropsType) => {
+export const MyPosts = (props: ProfilePagePropsType) => {
 
-    let postsElements=props.post.map(p=> <Post key={p.id} message={p.message} like={p.likesCount}/>)
+    let postsElements = props.post.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)
 
-    let newPostElement=useRef<HTMLTextAreaElement>()
+    let newPostElement = useRef<HTMLTextAreaElement>()
 
 
-const addPost=()=>{
-        if(newPostElement.current?.value){
-            props.addPost(newPostElement.current?.value)
-            newPostElement.current.value = ''
+    const addPost = () => {
+        if (newPostElement.current?.value) {
+            props.addPost()
         }
+    }
 
-}
+    let onPostOnChange = () => {
+        if (newPostElement.current?.value) {
+            props.updateNewPostText(newPostElement.current?.value)
+        }
+    }
 
     return (
         <div>
             <div>
-                <textarea ref={newPostElement as LegacyRef<HTMLTextAreaElement>}></textarea>
+                <textarea onChange={onPostOnChange}
+                          ref={newPostElement as LegacyRef<HTMLTextAreaElement>}
+                          value={props.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>

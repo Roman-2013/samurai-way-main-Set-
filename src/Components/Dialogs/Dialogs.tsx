@@ -12,6 +12,8 @@ export const Dialogs = (props:MessagesPagePropsType) => {
 
     let newMessage=useRef<HTMLTextAreaElement>()
     let sendMessage=()=>alert (newMessage.current?.value)
+
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
