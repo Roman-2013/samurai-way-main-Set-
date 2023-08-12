@@ -2,7 +2,7 @@ import {rerenderEntireTree} from '../render';
 import {StatePropsType} from '../App';
 
 
- export let state:StatePropsType = {
+export let state: StatePropsType = {
     profilePage: {
         post: [
             {id: 1, message: 'Hi,how are you', likesCount: 5},
@@ -50,7 +50,8 @@ import {StatePropsType} from '../App';
             {id: 3, message: 'Yo'},
             {id: 4, message: 'Yo'},
             {id: 5, message: 'Yo'},
-        ]
+        ],
+        newMessages: ''
     }
 }
 
@@ -59,18 +60,33 @@ import {StatePropsType} from '../App';
 interface CustomWindow extends Window {
     state: StatePropsType // Замените "any" на тип своего состояния
 }
+
 (window as unknown as CustomWindow).state = state;
 //------------------------------------
+
+export let addMessages = () => {
+    let newMes = {
+        id: 6,
+        message: state.messagesPage.newMessages
+    }
+    state.messagesPage.messages.push(newMes)
+    state.messagesPage.newMessages = ''
+    rerenderEntireTree(state)
+}
+export let sendMessage = (newMessages: string) => {
+    state.messagesPage.newMessages = newMessages
+    rerenderEntireTree(state)
+}
 
 
 export let addPost = () => {
     let newPost = {
         id: 5,
-        message:state.profilePage.newPostText,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.post.push(newPost)
-    state.profilePage.newPostText=''
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
 

@@ -7,10 +7,20 @@ import {Dialogs} from './Components/Dialogs/Dialogs';
 import {Route, Routes} from 'react-router-dom';
 import {addPost, updateNewPostText} from './redux/state';
 
+
 export type MessagesPagePropsType = {
     messages: Array<{ id: number, message: string }>
     dialogs: Array<{ id: number, name: string, image: string }>
+    newMessages:string
 }
+export type MessagesPropsType = {
+    messages: Array<{ id: number, message: string }>
+    dialogs: Array<{ id: number, name: string, image: string }>
+    newMessages:string
+    sendMessage:(newMessages:string)=>void
+    addMessages:()=>void
+}
+
 export type ProfilePagePropsType={
     post: Array<{ id: number, message: string, likesCount: number }>
     addPost: () => void
@@ -29,6 +39,8 @@ export type AppPropsType = {
     state: StatePropsType
     addPost: () => void
     updateNewPostText:(newText:string)=>void
+    sendMessage:(newMessages:string)=>void
+    addMessages:()=>void
 }
 export const App = (props: AppPropsType) => {
 
@@ -41,6 +53,9 @@ export const App = (props: AppPropsType) => {
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<Dialogs
+                               newMessages={props.state.messagesPage.newMessages}
+                               addMessages={props.addMessages}
+                               sendMessage={props.sendMessage}
                                dialogs={props.state.messagesPage.dialogs}
                                messages={props.state.messagesPage.messages}
                            />}/>
