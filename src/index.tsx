@@ -20,5 +20,5 @@ import {BrowserRouter} from 'react-router-dom';
         </BrowserRouter>, document.getElementById('root')
     );
 }
-rerenderEntireTree(state)
+rerenderEntireTree(state )
 subscribe(rerenderEntireTree)
