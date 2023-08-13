@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from '../render';
+
 import {StatePropsType} from '../App';
 
 
@@ -64,6 +64,16 @@ interface CustomWindow extends Window {
 (window as unknown as CustomWindow).state = state;
 //------------------------------------
 
+let rerenderEntireTree=(state:StatePropsType)=>{
+    console.log('state changed')
+}
+
+export const subscribe=(observer:(state:StatePropsType)=>void)=>{
+    rerenderEntireTree=observer
+}
+
+
+
 export let addMessages = () => {
     let newMes = {
         id: 6,
@@ -94,4 +104,5 @@ export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }
+
 
