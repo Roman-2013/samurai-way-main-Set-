@@ -10,7 +10,7 @@ import {BrowserRouter} from 'react-router-dom';
  let rerenderEntireTree = (state:StatePropsType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App
+               <App
                 sendMessage={sendMessage}
                 addMessages={addMessages}
                 state={state}
