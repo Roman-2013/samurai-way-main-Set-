@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {addMessages, addPost, sendMessage, state, subscribe, updateNewPostText} from './redux/state';
+import { store, subscribe, updateNewPostText} from './redux/state';
 import {App, StatePropsType} from './App';
 import {BrowserRouter} from 'react-router-dom';
 
@@ -11,14 +11,14 @@ import {BrowserRouter} from 'react-router-dom';
     ReactDOM.render(
         <BrowserRouter>
                <App
-                sendMessage={sendMessage}
-                addMessages={addMessages}
-                state={state}
-                addPost={addPost}
-                updateNewPostText={updateNewPostText}
+                // sendMessage={stor.sendMessage}
+                // addMessages={stor.addMessages}
+                store={store}
+                // addPost={stor.addPost}
+                // updateNewPostText={updateNewPostText}
             />,
         </BrowserRouter>, document.getElementById('root')
     );
 }
-rerenderEntireTree(state )
+rerenderEntireTree(store.state )
 subscribe(rerenderEntireTree)
