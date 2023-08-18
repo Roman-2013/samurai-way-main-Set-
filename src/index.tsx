@@ -5,20 +5,12 @@ import { store} from './redux/state';
 import {App, StatePropsType} from './App';
 import {BrowserRouter} from 'react-router-dom';
 
-
-
-
-
-
  let rerenderEntireTree = (state:StatePropsType) => {
     ReactDOM.render(
         <BrowserRouter>
                <App
                 store={store}
-                addPost={store.addPost.bind(store)}
-                updateNewPostText={store.updateNewPostText.bind(store)}
-                addMessages={store.addMessages.bind(store)}
-                sendMessage={store.sendMessage.bind(store)}
+                dispatch={store.dispatch.bind(store)}
             />,
         </BrowserRouter>, document.getElementById('root')
     );

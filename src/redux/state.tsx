@@ -1,8 +1,12 @@
-
 import {StatePropsType, StorePropsType} from '../App';
 
+export type ActionsType =
+    ReturnType<typeof addPostAC> |
+    ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof addMessagesAC> |
+    ReturnType<typeof sendMessageAC>
 
-export let store:StorePropsType= {
+export let store: StorePropsType = {
     _state: {
         profilePage: {
             post: [
@@ -55,44 +59,69 @@ export let store:StorePropsType= {
             newMessages: ''
         }
     },
-    getState(){
+    getState() {
         return this._state
     },
-    _callSubscriber (state:StatePropsType){
+    _callSubscriber(state: StatePropsType) {
         console.log('state changed')
     },
-    subscribe(observer:(state:StatePropsType)=>void){
-        this._callSubscriber=observer
+    subscribe(observer: (state: StatePropsType) => void) {
+        this._callSubscriber = observer
     },
-    addMessages(){
-        let newMes = {
-            id: 6,
-            message: this._state.messagesPage.newMessages
+
+    dispatch(action: ActionsType) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.post.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.payload.newText
+            this._callSubscriber(this._state)
         }
-        this._state.messagesPage.messages.push(newMes)
-        this._state.messagesPage.newMessages = ''
-        this._callSubscriber(this._state)
-    },
-    sendMessage (newMessages: string) {
-        this._state.messagesPage.newMessages = newMessages
-        this._callSubscriber(this._state)
-    },
-    addPost () {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
+        else if (action.type ==='ADD-MESSAGES'){
+            let newMes = {
+                id: 6,
+                message: this._state.messagesPage.newMessages
+            }
+            this._state.messagesPage.messages.push(newMes)
+            this._state.messagesPage.newMessages = ''
+            this._callSubscriber(this._state)
         }
-        this._state.profilePage.post.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText (newText: string){
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
+        else if(action.type==='SEND-MESSAGES'){
+            this._state.messagesPage.newMessages = action.payload.newMessages
+            this._callSubscriber(this._state)
+        }
     }
 }
 
+
+export let addPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export let updateNewPostTextAC = (newText:string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        payload:{newText}
+    } as const
+}
+export let addMessagesAC=()=>{
+    return {
+        type:'ADD-MESSAGES'
+    }as const
+}
+export let sendMessageAC=(newMessages: string)=>{
+    return {
+        type:'SEND-MESSAGES',
+        payload:{newMessages}
+    }as const
+}
 
 //------------------------------просто отобразить state через консоль браузера
 interface CustomWindow extends Window {
@@ -100,6 +129,8 @@ interface CustomWindow extends Window {
 }
 
 (window as unknown as CustomWindow)._state = store._state;
+
+
 //------------------------------------
 
 

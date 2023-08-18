@@ -1,7 +1,8 @@
 import React, {LegacyRef, useRef} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
-import {ProfilePagePropsType} from '../../../App';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/state';
+import {ProfilePagePropsType} from '../Profile';
 
 export const MyPosts = (props: ProfilePagePropsType) => {
 
@@ -12,13 +13,13 @@ export const MyPosts = (props: ProfilePagePropsType) => {
 
     const addPost = () => {
         if (newPostElement.current?.value) {
-            props.addPost()
+            props.dispatch(addPostAC())
         }
     }
 
     let onPostOnChange = () => {
         if (newPostElement.current?.value) {
-            props.updateNewPostText(newPostElement.current?.value)
+            props.dispatch(updateNewPostTextAC(newPostElement.current?.value))
         }
     }
 

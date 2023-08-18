@@ -2,18 +2,21 @@ import React from 'react';
 import s from './Profile.module.css'
 import {MyPosts} from './MePosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {ProfilePagePropsType} from '../../App';
+import {ActionsType} from '../../redux/state';
 
-
+export type ProfilePagePropsType={
+    post: Array<{ id: number, message: string, likesCount: number }>
+    newPostText:string
+    dispatch:(action:ActionsType)=>void
+}
 
 export const Profile = (props:ProfilePagePropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
             <MyPosts
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
                 newPostText={props.newPostText}
-                addPost={props.addPost}
                 post={props.post} />
         </div>
     )

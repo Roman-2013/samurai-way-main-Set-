@@ -2,8 +2,15 @@ import React, {LegacyRef, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {MessagesPagePropsType, MessagesPropsType} from '../../App';
+import {ActionsType, addMessagesAC, sendMessageAC} from '../../redux/state';
 
+
+export type MessagesPropsType = {
+    messages: Array<{ id: number, message: string }>
+    dialogs: Array<{ id: number, name: string, image: string }>
+    newMessages:string
+    dispatch:(action:ActionsType)=>void
+}
 
 
 export const Dialogs = (props:MessagesPropsType) => {
@@ -14,16 +21,12 @@ export const Dialogs = (props:MessagesPropsType) => {
 
     let sendMessage=()=>{
         if (newMessage.current?.value){
-            props.sendMessage(newMessage.current.value)
+            props.dispatch(sendMessageAC(newMessage.current.value))
         }
     }
 
     let addMessages=()=>{
-        props.addMessages()
-        // if(  newMessage.current?.value){
-        //     newMessage.current.value=''
-        // }
-        // console.log(props.newMessages)
+        props.dispatch(addMessagesAC())
     }
 
 
