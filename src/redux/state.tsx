@@ -1,19 +1,9 @@
 
-import {StatePropsType} from '../App';
+import {StatePropsType, StorePropsType} from '../App';
 
 
-
-let rerenderEntireTree=(state:StatePropsType)=>{
-    console.log('state changed')
-}
-
-export const subscribe=(observer:(state:StatePropsType)=>void)=>{
-    rerenderEntireTree=observer
-}
-
-
-export let store:any= {
-    state: {
+export let store:StorePropsType= {
+    _state: {
         profilePage: {
             post: [
                 {id: 1, message: 'Hi,how are you', likesCount: 5},
@@ -65,42 +55,51 @@ export let store:any= {
             newMessages: ''
         }
     },
-    addMessages:()=>{
+    getState(){
+        return this._state
+    },
+    _callSubscriber (state:StatePropsType){
+        console.log('state changed')
+    },
+    subscribe(observer:(state:StatePropsType)=>void){
+        this._callSubscriber=observer
+    },
+    addMessages(){
         let newMes = {
             id: 6,
-            message: store.state.messagesPage.newMessages
+            message: this._state.messagesPage.newMessages
         }
-        store.state.messagesPage.messages.push(newMes)
-        store.state.messagesPage.newMessages = ''
-        rerenderEntireTree(store.state)
+        this._state.messagesPage.messages.push(newMes)
+        this._state.messagesPage.newMessages = ''
+        this._callSubscriber(this._state)
     },
-    sendMessage:  (newMessages: string) => {
-        store.state.messagesPage.newMessages = newMessages
-        rerenderEntireTree(store.state)
+    sendMessage (newMessages: string) {
+        this._state.messagesPage.newMessages = newMessages
+        this._callSubscriber(this._state)
     },
-    addPost : () => {
+    addPost () {
         let newPost = {
             id: 5,
-            message: store.state.profilePage.newPostText,
+            message: this._state.profilePage.newPostText,
             likesCount: 0
         }
-        store.state.profilePage.post.push(newPost)
-        store.state.profilePage.newPostText = ''
-        rerenderEntireTree(store.state)
+        this._state.profilePage.post.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber(this._state)
     },
-    updateNewPostText : (newText: string) => {
-        store.state.profilePage.newPostText = newText
-        rerenderEntireTree(store.state)
+    updateNewPostText (newText: string){
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber(this._state)
     }
 }
 
 
 //------------------------------просто отобразить state через консоль браузера
 interface CustomWindow extends Window {
-    state: StatePropsType // Замените "any" на тип своего состояния
+    _state: StatePropsType // Замените "any" на тип своего состояния
 }
 
-(window as unknown as CustomWindow).state = store.state;
+(window as unknown as CustomWindow)._state = store._state;
 //------------------------------------
 
 
@@ -130,9 +129,9 @@ interface CustomWindow extends Window {
 //     rerenderEntireTree(state)
 // }
 
-export let updateNewPostText = (newText: string) => {
-    store.state.profilePage.newPostText = newText
-    rerenderEntireTree(store.state)
-}
+// export let updateNewPostText = (newText: string) => {
+//     store.state.profilePage.newPostText = newText
+//     rerenderEntireTree(store.state)
+// }
 
 

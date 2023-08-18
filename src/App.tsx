@@ -31,15 +31,30 @@ export type ProfilePropsType = {
     post: Array<{ id: number, message: string, likesCount: number }>
     newPostText:string
 }
-export type StatePropsType = {
+export type StatePropsType={
+    profilePage: ProfilePropsType,
+    messagesPage: MessagesPagePropsType
+}
+export type StorePropsType = {
+    _state:StatePropsType
+    getState:()=> StatePropsType;
+    _callSubscriber:(state: StatePropsType)=> void;
+    subscribe:(observer: (state: StatePropsType) => void)=> void;
     addPost: () => void
     updateNewPostText:(newText:string)=>void
     sendMessage:(newMessages:string)=>void
     addMessages:()=>void
-    state:{  profilePage: ProfilePropsType,   messagesPage: MessagesPagePropsType}
 }
+
+
+
+
 export type AppPropsType = {
-    store: StatePropsType
+    store: StorePropsType
+    addPost: () => void
+    updateNewPostText:(newText:string)=>void
+    sendMessage:(newMessages:string)=>void
+    addMessages:()=>void
 
 }
 export const App = (props: AppPropsType) => {
@@ -48,23 +63,23 @@ export const App = (props: AppPropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar frends={props.store.state.messagesPage.dialogs}/>
+            <Navbar frends={props.store._state.messagesPage.dialogs}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<Dialogs
-                               newMessages={props.store.state.messagesPage.newMessages}
-                               addMessages={props.store.addMessages}
-                               sendMessage={props.store.sendMessage}
-                               dialogs={props.store.state.messagesPage.dialogs}
-                               messages={props.store.state.messagesPage.messages}
+                               newMessages={props.store.getState().messagesPage.newMessages}
+                               addMessages={props.addMessages}
+                               sendMessage={props.sendMessage}
+                               dialogs={props.store.getState().messagesPage.dialogs}
+                               messages={props.store.getState().messagesPage.messages}
                            />}/>
                     <Route path={'/profile'}
                            element={<Profile
-                               updateNewPostText={props.store.updateNewPostText}
-                               addPost={props.store.addPost}
-                               newPostText={props.store.state.profilePage.newPostText}
-                               post={props.store.state.profilePage.post}
+                               updateNewPostText={props.updateNewPostText}
+                               addPost={props.addPost}
+                               newPostText={props.store.getState().profilePage.newPostText}
+                               post={props.store.getState().profilePage.post}
                            />
                     }/>
                 </Routes>
