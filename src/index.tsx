@@ -10,7 +10,6 @@ import {BrowserRouter} from 'react-router-dom';
         <BrowserRouter>
                <App
                 store={store}
-                dispatch={store.dispatch.bind(store)}
             />,
         </BrowserRouter>, document.getElementById('root')
     );

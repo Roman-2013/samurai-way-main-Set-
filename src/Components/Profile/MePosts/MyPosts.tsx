@@ -6,7 +6,7 @@ import {ProfilePagePropsType} from '../Profile';
 
 export const MyPosts = (props: ProfilePagePropsType) => {
 
-    let postsElements = props.post.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)
+    let postsElements = props.profilePage.post.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)
 
     let newPostElement = useRef<HTMLTextAreaElement>()
 
@@ -26,9 +26,11 @@ export const MyPosts = (props: ProfilePagePropsType) => {
     return (
         <div>
             <div>
-                <textarea onChange={onPostOnChange}
+                <textarea
+                    placeholder={'Enter your post text'}
+                    onChange={onPostOnChange}
                           ref={newPostElement as LegacyRef<HTMLTextAreaElement>}
-                          value={props.newPostText}/>
+                          value={props.profilePage.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>

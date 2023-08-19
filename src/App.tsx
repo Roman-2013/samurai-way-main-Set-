@@ -8,36 +8,32 @@ import {Route, Routes} from 'react-router-dom';
 import {ActionsType} from './redux/state';
 
 
-
 export type MessagesPagePropsType = {
     messages: Array<{ id: number, message: string }>
     dialogs: Array<{ id: number, name: string, image: string }>
-    newMessages:string
+    newMessages: string
 }
 export type ProfilePropsType = {
     post: Array<{ id: number, message: string, likesCount: number }>
-    newPostText:string
+    newPostText: string
 }
 
 
-
-
-export type StatePropsType={
+export type StatePropsType = {
     profilePage: ProfilePropsType,
     messagesPage: MessagesPagePropsType
 }
 
 export type StorePropsType = {
-    _state:StatePropsType
-    getState:()=> StatePropsType;
-    _callSubscriber:(state: StatePropsType)=> void;
-    subscribe:(observer: (state: StatePropsType) => void)=> void;
-    dispatch:(action:ActionsType)=>void
+    _state: StatePropsType
+    getState: () => StatePropsType;
+    _callSubscriber: (state: StatePropsType) => void;
+    subscribe: (observer: (state: StatePropsType) => void) => void;
+    dispatch: (action: ActionsType) => void
 }
 
 export type AppPropsType = {
     store: StorePropsType
-    dispatch:(action:ActionsType)=>void
 }
 export const App = (props: AppPropsType) => {
 
@@ -50,18 +46,15 @@ export const App = (props: AppPropsType) => {
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<Dialogs
-                               newMessages={props.store.getState().messagesPage.newMessages}
-                               dialogs={props.store.getState().messagesPage.dialogs}
-                               messages={props.store.getState().messagesPage.messages}
-                               dispatch={props.dispatch}
+                               messagesPage={props.store.getState().messagesPage}
+                               dispatch={props.store.dispatch}
                            />}/>
                     <Route path={'/profile'}
                            element={<Profile
-                               dispatch={props.dispatch}
-                                newPostText={props.store.getState().profilePage.newPostText}
-                                post={props.store.getState().profilePage.post}
+                               dispatch={props.store.dispatch}
+                               profilePage={props.store.getState().profilePage}
                            />
-                    }/>
+                           }/>
                 </Routes>
             </div>
         </div>

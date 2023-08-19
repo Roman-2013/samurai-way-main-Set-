@@ -1,31 +1,28 @@
-import React, {LegacyRef, useRef} from 'react';
+import React, {ChangeEvent, LegacyRef, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 import {ActionsType, addMessagesAC, sendMessageAC} from '../../redux/state';
+import {MessagesPagePropsType} from '../../App';
 
 
 export type MessagesPropsType = {
-    messages: Array<{ id: number, message: string }>
-    dialogs: Array<{ id: number, name: string, image: string }>
-    newMessages:string
-    dispatch:(action:ActionsType)=>void
+    messagesPage:MessagesPagePropsType
+    dispatch: (action: ActionsType) => void
 }
 
 
-export const Dialogs = (props:MessagesPropsType) => {
-    let dialodsElements=props.dialogs.map(d=><DialogItem key={d.id} image={d.image} name={d.name} id={d.id}/>)
-    let messagesElements=props.messages.map(m=><Message key={m.id}  message={m.message}/>)
+export const Dialogs = (props: MessagesPropsType) => {
+    let dialodsElements = props.messagesPage.dialogs.map(d => <DialogItem key={d.id} image={d.image} name={d.name} id={d.id}/>)
+    let messagesElements = props.messagesPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    let newMessage=useRef<HTMLTextAreaElement>()
 
-    let sendMessage=()=>{
-        if (newMessage.current?.value){
-            props.dispatch(sendMessageAC(newMessage.current.value))
-        }
+    let sendMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
+            props.dispatch(sendMessageAC(e.currentTarget.value))
+
     }
 
-    let addMessages=()=>{
+    let addMessages = () => {
         props.dispatch(addMessagesAC())
     }
 
@@ -39,9 +36,11 @@ export const Dialogs = (props:MessagesPropsType) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea value={props.newMessages}
-                          onChange={sendMessage}
-                          ref={newMessage as LegacyRef<HTMLTextAreaElement>}/>
+                <textarea
+                    placeholder={"Enter your message"}
+                    value={props.messagesPage.newMessages}
+                    onChange={sendMessage}
+                 />
             </div>
             <div>
                 <button onClick={addMessages}>Send Message</button>

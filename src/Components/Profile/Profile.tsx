@@ -3,10 +3,10 @@ import s from './Profile.module.css'
 import {MyPosts} from './MePosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ActionsType} from '../../redux/state';
+import {ProfilePropsType} from '../../App';
 
 export type ProfilePagePropsType={
-    post: Array<{ id: number, message: string, likesCount: number }>
-    newPostText:string
+    profilePage:ProfilePropsType
     dispatch:(action:ActionsType)=>void
 }
 
@@ -16,8 +16,8 @@ export const Profile = (props:ProfilePagePropsType) => {
             <ProfileInfo/>
             <MyPosts
                 dispatch={props.dispatch}
-                newPostText={props.newPostText}
-                post={props.post} />
+                profilePage={props.profilePage}
+                />
         </div>
     )
 }
