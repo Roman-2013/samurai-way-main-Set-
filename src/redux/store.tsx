@@ -1,4 +1,6 @@
-import {StatePropsType, StorePropsType} from '../App';
+import {MessagesPagePropsType, ProfilePropsType, StatePropsType, StorePropsType} from '../App';
+import {addPostAC, profilePageReducer, updateNewPostTextAC} from './profilePage-reducer';
+import {addMessagesAC, messagesPageReducer, sendMessageAC} from './messagesPage-reducer';
 
 export type ActionsType =
     ReturnType<typeof addPostAC> |
@@ -6,7 +8,7 @@ export type ActionsType =
     ReturnType<typeof addMessagesAC> |
     ReturnType<typeof sendMessageAC>
 
-export let store: StorePropsType = {
+ let store: any = {
     _state: {
         profilePage: {
             post: [
@@ -68,68 +70,26 @@ export let store: StorePropsType = {
     subscribe(observer: (state: StatePropsType) => void) {
         this._callSubscriber = observer
     },
-
     dispatch(action: ActionsType) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.post.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.payload.newText
-            this._callSubscriber(this._state)
-        }
-        else if (action.type ==='ADD-MESSAGES'){
-            let newMes = {
-                id: 6,
-                message: this._state.messagesPage.newMessages
-            }
-            this._state.messagesPage.messages.push(newMes)
-            this._state.messagesPage.newMessages = ''
-            this._callSubscriber(this._state)
-        }
-        else if(action.type==='SEND-MESSAGES'){
-            this._state.messagesPage.newMessages = action.payload.newMessages
-            this._callSubscriber(this._state)
-        }
+
+       this._state.profilePage= profilePageReducer(this._state.profilePage, action)
+       this._state.messagesPage= messagesPageReducer(this._state.messagesPage, action)
+
+        this._callSubscriber(this._state)
     }
 }
 
 
-export let addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-export let updateNewPostTextAC = (newText:string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        payload:{newText}
-    } as const
-}
-export let addMessagesAC=()=>{
-    return {
-        type:'ADD-MESSAGES'
-    }as const
-}
-export let sendMessageAC=(newMessages: string)=>{
-    return {
-        type:'SEND-MESSAGES',
-        payload:{newMessages}
-    }as const
-}
+
+
 
 //------------------------------просто отобразить state через консоль браузера
-interface CustomWindow extends Window {
-    _state: StatePropsType // Замените "any" на тип своего состояния
-}
-
-(window as unknown as CustomWindow)._state = store._state;
-
+// interface CustomWindow extends Window {
+//     _state: StatePropsType // Замените "any" на тип своего состояния
+// }
+//
+// (window as unknown as CustomWindow)._state = store._state;
+//
 
 //------------------------------------
 

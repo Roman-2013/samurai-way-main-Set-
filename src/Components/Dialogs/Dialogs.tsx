@@ -2,13 +2,15 @@ import React, {ChangeEvent, LegacyRef, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {ActionsType, addMessagesAC, sendMessageAC} from '../../redux/state';
-import {MessagesPagePropsType} from '../../App';
+import {MessagesPagePropsType, StorePropsType} from '../../App';
+import {addMessagesAC, sendMessageAC} from '../../redux/messagesPage-reducer';
+import {ActionsType} from '../../redux/store';
 
 
 export type MessagesPropsType = {
     messagesPage:MessagesPagePropsType
     dispatch: (action: ActionsType) => void
+    //store:StorePropsType
 }
 
 
@@ -18,11 +20,13 @@ export const Dialogs = (props: MessagesPropsType) => {
 
 
     let sendMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(sendMessageAC(e.currentTarget.value))
+
+           props.dispatch(sendMessageAC(e.currentTarget.value))
 
     }
 
     let addMessages = () => {
+
         props.dispatch(addMessagesAC())
     }
 

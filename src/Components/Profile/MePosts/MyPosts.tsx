@@ -1,8 +1,9 @@
 import React, {LegacyRef, useRef} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
-import {addPostAC, updateNewPostTextAC} from '../../../redux/state';
+
 import {ProfilePagePropsType} from '../Profile';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/profilePage-reducer';
 
 export const MyPosts = (props: ProfilePagePropsType) => {
 
@@ -29,8 +30,8 @@ export const MyPosts = (props: ProfilePagePropsType) => {
                 <textarea
                     placeholder={'Enter your post text'}
                     onChange={onPostOnChange}
-                          ref={newPostElement as LegacyRef<HTMLTextAreaElement>}
-                          value={props.profilePage.newPostText}/>
+                    ref={newPostElement as LegacyRef<HTMLTextAreaElement>}
+                    value={props.profilePage.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>

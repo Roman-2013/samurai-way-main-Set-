@@ -5,7 +5,8 @@ import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
 import {Dialogs} from './Components/Dialogs/Dialogs';
 import {Route, Routes} from 'react-router-dom';
-import {ActionsType} from './redux/state';
+import {ActionsType} from './redux/store';
+import {AppRootStateType} from './redux/redux-store';
 
 
 export type MessagesPagePropsType = {
@@ -25,34 +26,29 @@ export type StatePropsType = {
 }
 
 export type StorePropsType = {
-    _state: StatePropsType
-    getState: () => StatePropsType;
-    _callSubscriber: (state: StatePropsType) => void;
-    subscribe: (observer: (state: StatePropsType) => void) => void;
+    state:AppRootStateType
     dispatch: (action: ActionsType) => void
 }
 
-export type AppPropsType = {
-    store: StorePropsType
-}
-export const App = (props: AppPropsType) => {
+export const App = (props: StorePropsType) => {
 
 
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar frends={props.store._state.messagesPage.dialogs}/>
+            <Navbar frends={props.state.messagesPageReducer.dialogs}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<Dialogs
-                               messagesPage={props.store.getState().messagesPage}
-                               dispatch={props.store.dispatch}
+                               messagesPage={props.state.messagesPageReducer}
+                               //dispatch={props.store.dispatch}
+                               dispatch={props.dispatch}
                            />}/>
                     <Route path={'/profile'}
                            element={<Profile
-                               dispatch={props.store.dispatch}
-                               profilePage={props.store.getState().profilePage}
+                               dispatch={props.dispatch}
+                               profilePage={props.state.profilePageReducer}
                            />
                            }/>
                 </Routes>
