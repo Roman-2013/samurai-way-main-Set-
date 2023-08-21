@@ -4,6 +4,7 @@ import {MyPosts} from './MePosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ActionsType} from '../../redux/store';
 import {ProfilePropsType, StorePropsType} from '../../App';
+import {MyPostsContainer} from './MePosts/MyPostsContainer';
 
 export type ProfilePagePropsType={
     profilePage:ProfilePropsType
@@ -14,7 +15,7 @@ export const Profile = (props:ProfilePagePropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts
+            <MyPostsContainer
                 dispatch={props.dispatch}
                 profilePage={props.profilePage}
                 />

@@ -1,11 +1,20 @@
 import React, {LegacyRef, useRef} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
-
 import {ProfilePagePropsType} from '../Profile';
-import {addPostAC, updateNewPostTextAC} from '../../../redux/profilePage-reducer';
+import {ProfilePropsType} from '../../../App';
+import {ActionsType} from '../../../redux/store';
 
-export const MyPosts = (props: ProfilePagePropsType) => {
+
+export type MyPostsPropsType={
+    profilePage:ProfilePropsType
+    addPost:()=>void
+    updateNewPostText:(text:string)=>void
+}
+
+
+
+export const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElements = props.profilePage.post.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)
 
@@ -14,13 +23,13 @@ export const MyPosts = (props: ProfilePagePropsType) => {
 
     const addPost = () => {
         if (newPostElement.current?.value) {
-            props.dispatch(addPostAC())
+            props.addPost()
         }
     }
 
     let onPostOnChange = () => {
         if (newPostElement.current?.value) {
-            props.dispatch(updateNewPostTextAC(newPostElement.current?.value))
+            props.updateNewPostText(newPostElement.current?.value)
         }
     }
 

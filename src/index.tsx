@@ -5,14 +5,14 @@ import {App, StatePropsType} from './App';
 import {BrowserRouter} from 'react-router-dom';
 import {AppRootStateType, store} from './redux/redux-store';
 
-//console.log(store.getState())
+console.log(store.getState())
  let rerenderEntireTree = (state:AppRootStateType) => {
     ReactDOM.render(
 
         <BrowserRouter>
                <App
-                state={store.getState()}
-                dispatch={store.dispatch}
+                 state={store.getState()}
+                 dispatch={store.dispatch}
             />,
         </BrowserRouter>, document.getElementById('root')
     );

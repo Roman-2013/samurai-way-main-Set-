@@ -7,6 +7,7 @@ import {Dialogs} from './Components/Dialogs/Dialogs';
 import {Route, Routes} from 'react-router-dom';
 import {ActionsType} from './redux/store';
 import {AppRootStateType} from './redux/redux-store';
+import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 
 
 export type MessagesPagePropsType = {
@@ -30,6 +31,7 @@ export type StorePropsType = {
     dispatch: (action: ActionsType) => void
 }
 
+
 export const App = (props: StorePropsType) => {
 
 
@@ -40,9 +42,8 @@ export const App = (props: StorePropsType) => {
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={'/dialogs/*'}
-                           element={<Dialogs
+                           element={<DialogsContainer
                                messagesPage={props.state.messagesPageReducer}
-                               //dispatch={props.store.dispatch}
                                dispatch={props.dispatch}
                            />}/>
                     <Route path={'/profile'}
