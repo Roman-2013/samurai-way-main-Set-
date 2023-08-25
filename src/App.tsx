@@ -24,8 +24,6 @@ export type ProfilePropsType = {
 
 
 export const App = () => {
-
-    console.log(store)
     return (
         <div className="app-wrapper">
             <Header/>

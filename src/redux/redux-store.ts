@@ -8,8 +8,8 @@ let rootReducer = combineReducers({
     profilePageReducer,
     messagesPageReducer,
 })
-export type AppRootStateType=ReturnType<typeof rootReducer>
-export type StoreType=Store<AppRootStateType,ActionsType>
+export type AppRootStateType = ReturnType<typeof rootReducer>
+export type StoreType = Store<AppRootStateType, ActionsType>
 
-export let store:Store<AppRootStateType,ActionsType> = createStore(rootReducer)
+export let store = createStore(rootReducer)
 
