@@ -3,10 +3,9 @@ import './App.css';
 import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
-import {Dialogs} from './Components/Dialogs/Dialogs';
 import {Route, Routes} from 'react-router-dom';
 import {ActionsType} from './redux/store';
-import {AppRootStateType} from './redux/redux-store';
+import { AppRootStateType, store} from './redux/redux-store';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 
 
@@ -21,37 +20,22 @@ export type ProfilePropsType = {
 }
 
 
-export type StatePropsType = {
-    profilePage: ProfilePropsType,
-    messagesPage: MessagesPagePropsType
-}
-
-export type StorePropsType = {
-    state:AppRootStateType
-    dispatch: (action: ActionsType) => void
-}
 
 
-export const App = (props: StorePropsType) => {
 
+export const App = () => {
 
+    console.log(store)
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar frends={props.state.messagesPageReducer.dialogs}/>
+            <Navbar frends={store.getState().messagesPageReducer.dialogs}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={'/dialogs/*'}
-                           element={<DialogsContainer
-                               messagesPage={props.state.messagesPageReducer}
-                               dispatch={props.dispatch}
-                           />}/>
+                           element={<DialogsContainer/>}/>
                     <Route path={'/profile'}
-                           element={<Profile
-                               dispatch={props.dispatch}
-                               profilePage={props.state.profilePageReducer}
-                           />
-                           }/>
+                           element={<Profile/>}/>
                 </Routes>
             </div>
         </div>

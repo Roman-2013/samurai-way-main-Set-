@@ -1,6 +1,18 @@
-import {MessagesPagePropsType, ProfilePropsType, StatePropsType, StorePropsType} from '../App';
+import {MessagesPagePropsType, ProfilePropsType} from '../App';
 import {addPostAC, profilePageReducer, updateNewPostTextAC} from './profilePage-reducer';
 import {addMessagesAC, messagesPageReducer, sendMessageAC} from './messagesPage-reducer';
+
+export type StatePropsType = {
+    profilePage: ProfilePropsType,
+    messagesPage: MessagesPagePropsType
+}
+export type StorePropsType={
+    _state:StatePropsType
+    _callSubscriber:(_state:StatePropsType)=>void
+    subscribe:(observer: (state: StatePropsType) => void)=>void
+    getState:()=>StatePropsType
+    dispatch: (action: ActionsType) => void
+}
 
 export type ActionsType =
     ReturnType<typeof addPostAC> |
@@ -8,7 +20,7 @@ export type ActionsType =
     ReturnType<typeof addMessagesAC> |
     ReturnType<typeof sendMessageAC>
 
- let store: any = {
+ let store: StorePropsType = {
     _state: {
         profilePage: {
             post: [

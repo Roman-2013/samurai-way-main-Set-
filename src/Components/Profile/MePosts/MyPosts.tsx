@@ -1,7 +1,6 @@
 import React, {LegacyRef, useRef} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
-import {ProfilePagePropsType} from '../Profile';
 import {ProfilePropsType} from '../../../App';
 import {ActionsType} from '../../../redux/store';
 
