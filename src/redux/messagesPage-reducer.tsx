@@ -51,16 +51,11 @@ export const messagesPageReducer = (state: MessagesPagePropsType=initialState, a
 
     switch (action.type) {
         case 'ADD-MESSAGES':
-            let newMes = {
-                id: 6,
-                message: state.newMessages
-            }
-            state.messages.push(newMes)
-            state.newMessages = ''
-            return state;
+            let newMes = {id: 6, message: state.newMessages}
+            return {...state,messages:[newMes,...state.messages],newMessages:''}
         case 'SEND-MESSAGES':
             state.newMessages = action.payload.newMessages
-            return state;
+            return {...state,newMessages:action.payload.newMessages};
         default:
             return state
     }
