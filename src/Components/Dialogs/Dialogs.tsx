@@ -14,8 +14,8 @@ export type DialogsPropsType = {
 
 
 export const Dialogs = (props: DialogsPropsType) => {
-    let dialogsElements = props.messagesPage.dialogs.map(d => <DialogItem key={d.id} image={d.image} name={d.name} id={d.id}/>)
-    let messagesElements = props.messagesPage.messages.map(m => <Message key={m.id} message={m.message}/>)
+    let dialogsElements = props.messagesPage.dialogs.map((d,index) => <DialogItem key={index} image={d.image} name={d.name} id={d.id}/>)
+    let messagesElements = props.messagesPage.messages.map((m,index) => <Message key={index} message={m.message}/>)
 
 
     let sendMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
