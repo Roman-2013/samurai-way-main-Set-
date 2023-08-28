@@ -1,19 +1,19 @@
 import React from 'react';
-import {ActionsType} from './store';
 import {ProfilePropsType} from '../App';
-import {addMessagesAC, sendMessageAC} from './messagesPage-reducer';
+import {ActionsType} from './messagesPage-reducer';
 
 
 let initialState = {
     post: [
         {id: 1, message: 'Hi,how are you', likesCount: 5},
         {id: 2, message: 'It\'s my first post', likesCount: 13},
-    ],
+    ] as Array<{ id: number, message: string, likesCount: number }>,
     newPostText: ''
 }
 
+ type InitialStateType=typeof initialState
 
-export const profilePageReducer = (state: ProfilePropsType = initialState, action: ActionsType) => {
+export const profilePageReducer = (state: InitialStateType = initialState, action: ActionsType):InitialStateType => {
 
     switch (action.type) {
         case 'ADD-POST':

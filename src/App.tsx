@@ -4,9 +4,9 @@ import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
 import {Profile} from './Components/Profile/Profile';
 import {Route, Routes} from 'react-router-dom';
-import {ActionsType} from './redux/store';
-import { AppRootStateType, store} from './redux/redux-store';
+import { store} from './redux/redux-store';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
+import {UsersContainer} from './Components/Users/UsersContainer';
 
 
 export type MessagesPagePropsType = {
@@ -34,6 +34,8 @@ export const App = () => {
                            element={<DialogsContainer/>}/>
                     <Route path={'/profile'}
                            element={<Profile/>}/>
+                    <Route path={'/users'}
+                           element={<UsersContainer/>}/>
                 </Routes>
             </div>
         </div>

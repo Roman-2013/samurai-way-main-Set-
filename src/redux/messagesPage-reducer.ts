@@ -1,10 +1,14 @@
 import React from 'react';
-import {MessagesPagePropsType} from '../App';
 import {addPostAC, updateNewPostTextAC} from './profilePage-reducer';
-import {ActionsType} from './store';
 
 
-let initialState: MessagesPagePropsType = {
+export type ActionsType =
+    ReturnType<typeof addPostAC> |
+    ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof addMessagesAC> |
+    ReturnType<typeof sendMessageAC>
+
+let initialState = {
     dialogs: [
         {
             id: 1,
@@ -36,18 +40,20 @@ let initialState: MessagesPagePropsType = {
             name: 'Valera',
             image: 'https://static5.tgstat.ru/channels/_0/a3/a3193315ddbeecd0c7993cf1ac3cf9ba.jpg'
         },
-    ],
+    ] as Array<{ id: number, name: string, image: string }>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How is your it-kamasutra'},
         {id: 3, message: 'Yo'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
-    ],
+    ] as Array<{ id: number, message: string }>,
     newMessages: ''
 }
 
-export const messagesPageReducer = (state: MessagesPagePropsType = initialState, action: ActionsType) => {
+ type InitialStateType=typeof initialState
+
+export const messagesPageReducer = (state: InitialStateType = initialState, action: ActionsType):InitialStateType => {
 
     switch (action.type) {
         case 'ADD-MESSAGES':

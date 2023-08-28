@@ -2,11 +2,11 @@ import {MessagesPagePropsType, ProfilePropsType} from '../App';
 import {addPostAC, profilePageReducer, updateNewPostTextAC} from './profilePage-reducer';
 import {addMessagesAC, messagesPageReducer, sendMessageAC} from './messagesPage-reducer';
 
-export type StatePropsType = {
+ type StatePropsType = {
     profilePage: ProfilePropsType,
     messagesPage: MessagesPagePropsType
 }
-export type StorePropsType={
+ type StorePropsType={
     _state:StatePropsType
     _callSubscriber:(_state:StatePropsType)=>void
     subscribe:(observer: (state: StatePropsType) => void)=>void
@@ -14,7 +14,7 @@ export type StorePropsType={
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType =
+ type ActionsType =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessagesAC> |

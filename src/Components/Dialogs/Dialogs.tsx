@@ -2,15 +2,11 @@ import React, {ChangeEvent, LegacyRef, useRef} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {MessagesPagePropsType} from '../../App';
+import {MapStateToProps,MapDispatchToProps} from './DialogsContainer';
 
 
 
-export type DialogsPropsType = {
-    messagesPage:MessagesPagePropsType
-    addMessages:()=>void
-    sendMessage:(value:string)=>void
-}
+ type DialogsPropsType = MapStateToProps & MapDispatchToProps
 
 
 export const Dialogs = (props: DialogsPropsType) => {

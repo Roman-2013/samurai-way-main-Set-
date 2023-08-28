@@ -1,15 +1,12 @@
 import React, {LegacyRef, useRef} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Posts/Post';
-import {ProfilePropsType} from '../../../App';
-import {ActionsType} from '../../../redux/store';
+import {MapDispatchToPropsType, MapStateToPropsType} from './MyPostsContainer';
 
 
-export type MyPostsPropsType={
-    profilePage:ProfilePropsType
-    addPost:()=>void
-    updateNewPostText:(text:string)=>void
-}
+
+export type MyPostsPropsType=MapStateToPropsType & MapDispatchToPropsType
+
 
 
 
