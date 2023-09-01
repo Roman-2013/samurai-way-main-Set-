@@ -9,13 +9,25 @@ type SetUsersACType = ReturnType<typeof setUsersAC>
 export type ActionsTypeUsers = FollowACType | UnfollowACType | SetUsersACType
 
 export type UsersType = {
-    id: number
-    photo: string
-    followed: boolean
-    fullName: string
+    // id: number
+    // photo: string
+    // followed: boolean
+    // fullName: string
+    // status: string
+    // location: { city: string, country: string }
+    name:string
+    id:number
+    uniqueUrlName: string
+    photos: { small: string ,large: string },
     status: string
-    location: { city: string, country: string }
+    followed: boolean
 }
+
+
+
+
+
+
 let initialState = {
     users: [] as UsersType[]
 }
