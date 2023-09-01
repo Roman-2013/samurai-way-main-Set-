@@ -7,16 +7,19 @@ type UsersType = MapDispatchToProps & MapStateToPropsUsersType
 
 
 export const Users = (props: UsersType) => {
-    if (props.users.length === 0) {
-
-        axios.get('https://social-network.samuraijs.com/api/1.0//users')
-            .then((res) => {
-                props.setUsers(res.data.items)
-            })
+    let getUsers=()=>{
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0//users')
+                .then((res) => {
+                    props.setUsers(res.data.items)
+                })
+        }
     }
+
 
     return (
         <div>
+            <button onClick={getUsers}>Get users</button>
             {
                 props.users.map(el => <div key={el.id}>
                  <span>
