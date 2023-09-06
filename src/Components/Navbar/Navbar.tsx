@@ -14,6 +14,7 @@ export const Navbar = (props: NavbarPropsType) => {
             <div><NavLink className={navData => navData.isActive ? classes.active : classes.item} to={'/news'}>News</NavLink></div>
             <div><NavLink className={navData => navData.isActive ? classes.active : classes.item} to={'/music'}>Music</NavLink></div>
             <div><NavLink className={({isActive}) => isActive ? classes.active : classes.item} to={'/settings'}>Settings</NavLink></div>
+            <div><NavLink className={({isActive}) => isActive ? classes.active : classes.item} to={'/Users'}>Users</NavLink></div>
 
             <h2>Friends</h2>
             <div className={classes.friends}>

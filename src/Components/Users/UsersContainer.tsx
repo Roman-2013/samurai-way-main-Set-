@@ -9,7 +9,9 @@ import {
     unfollowAC,
     UsersType
 } from '../../redux/users-reducer';
-import {Users} from './Users';
+
+import { Users} from './Users';
+
 
 export type MapStateToPropsUsersType={
     users:UsersType[]
