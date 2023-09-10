@@ -5,18 +5,17 @@ import userPhoto from '../../assets/images/user.jpg'
 import {UsersType} from '../../redux/users-reducer';
 
 
-type UsersTypeToMap=MapStateToPropsUsersType & MapDispatchToProps
+type UsersTypeToMap = MapStateToPropsUsersType & MapDispatchToProps
 
 export class Users extends React.Component<UsersTypeToMap, any> {
 
-    constructor(props:UsersTypeToMap) {
-        super(props);
+
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0//users')
             .then((res) => {
                 this.props.setUsers(res.data.items)
             })
     }
-
 
 
     render() {
