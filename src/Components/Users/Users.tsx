@@ -3,12 +3,12 @@ import {MapDispatchToProps, MapStateToPropsUsersType} from './UsersContainer';
 import axios from 'axios';
 import userPhoto from '../../assets/images/user.jpg'
 import {UsersType} from '../../redux/users-reducer';
+import s from './Users.module.css'
 
 
 type UsersTypeToMap = MapStateToPropsUsersType & MapDispatchToProps
 
 export class Users extends React.Component<UsersTypeToMap, any> {
-
 
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0//users')
@@ -17,10 +17,15 @@ export class Users extends React.Component<UsersTypeToMap, any> {
             })
     }
 
-
     render() {
         return <div>
-
+            <div>
+                <span className={s.selectedPAge}>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
             {
                 this.props.users.map(el => <div key={el.id}>
                  <span>
