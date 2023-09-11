@@ -11,20 +11,40 @@ type UsersTypeToMap = MapStateToPropsUsersType & MapDispatchToProps
 export class Users extends React.Component<UsersTypeToMap, any> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0//users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then((res) => {
+                this.props.setUsers(res.data.items)
+                this.props.setTotalUsersCount(res.data.totalCount)
+            })
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then((res) => {
                 this.props.setUsers(res.data.items)
             })
     }
 
     render() {
+
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
+
+
         return <div>
             <div>
-                <span className={s.selectedPAge}>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
+                {pages.map(el => {
+                    return <span onClick={(e) => {
+                        this.onPageChanged(el)
+                    }} className={this.props.currentPage === el ? s.selectedPAge : ''}>{el}</span>
+                })}
             </div>
             {
                 this.props.users.map(el => <div key={el.id}>
