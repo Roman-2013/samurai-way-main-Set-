@@ -6,7 +6,7 @@ import {Profile} from './Components/Profile/Profile';
 import {Route, Routes} from 'react-router-dom';
 import { store} from './redux/redux-store';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
-import {UsersContainer} from './Components/Users/UsersContainer';
+import { UsersContainer1} from './Components/Users/UsersContainer';
 
 
 export type MessagesPagePropsType = {
@@ -35,7 +35,7 @@ export const App = () => {
                     <Route path={'/profile'}
                            element={<Profile/>}/>
                     <Route path={'/users'}
-                           element={<UsersContainer/>}/>
+                           element={<UsersContainer1/>}/>
                 </Routes>
             </div>
         </div>

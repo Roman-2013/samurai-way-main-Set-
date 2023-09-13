@@ -1,61 +1,46 @@
 import React from 'react';
-import {MapDispatchToProps, MapStateToPropsUsersType} from './UsersContainer';
-import axios from 'axios';
-import userPhoto from '../../assets/images/user.jpg'
+import s from './Users.module.css';
+import userPhoto from '../../assets/images/user.jpg';
 import {UsersType} from '../../redux/users-reducer';
-import s from './Users.module.css'
+
+type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: UsersType[]
+    unfollow: (userID: number) => void
+    follow: (userID: number) => void
+}
 
 
-type UsersTypeToMap = MapStateToPropsUsersType & MapDispatchToProps
-
-export class Users extends React.Component<UsersTypeToMap, any> {
-
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(res.data.totalCount)
-            })
+export const Users: React.FC<UsersPropsType> = (props) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-            })
-    }
-
-    render() {
-
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-
-
-
-        return <div>
+    return (
+        <div>
             <div>
                 {pages.map(el => {
-                    return <span onClick={(e) => {
-                        this.onPageChanged(el)
-                    }} className={this.props.currentPage === el ? s.selectedPAge : ''}>{el}</span>
+                    return <span key={el} onClick={(e) => {
+                        props.onPageChanged(el)
+                    }} className={props.currentPage === el ? s.selectedPAge : ''}>{el}</span>
                 })}
             </div>
             {
-                this.props.users.map(el => <div key={el.id}>
+                props.users.map(el => <div key={el.id}>
                  <span>
                      <div>
                          <img src={el.photos.small !== null ? el.photos.small : userPhoto} alt=""/>
                      </div>
                      <div>
                          {el.followed
-                             ? <button onClick={() => this.props.unfollow(el.id)}>Unfollow</button>
-                             : <button onClick={() => this.props.follow(el.id)}>Follow</button>
+                             ? <button onClick={() => props.unfollow(el.id)}>Unfollow</button>
+                             : <button onClick={() => props.follow(el.id)}>Follow</button>
                          }
 
                      </div>
@@ -72,9 +57,7 @@ export class Users extends React.Component<UsersTypeToMap, any> {
                  </span>
                 </div>)
             }
-        </div>;
-    }
-}
-
-
+        </div>
+    )
+};
 
