@@ -1,20 +1,20 @@
 import React from 'react';
 
 
-type FollowACType = ReturnType<typeof followAC>
-type UnfollowACType = ReturnType<typeof unfollowAC>
-type SetUsersACType = ReturnType<typeof setUsersAC>
-type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-type SetIsFetchingtACType = ReturnType<typeof setIsFetchingAC>
+type followType = ReturnType<typeof follow>
+type UnfollowType = ReturnType<typeof unfollow>
+type setUsersType = ReturnType<typeof setUsers>
+type setCurrentPageType = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+type SetIsFetchingtACType = ReturnType<typeof setIsFetching>
 
 
 export type ActionsTypeUsers =
-    FollowACType
-    | UnfollowACType
-    | SetUsersACType
-    | SetCurrentPageACType
-    | SetTotalUsersCountACType
+    followType
+    | UnfollowType
+    | setUsersType
+    | setCurrentPageType
+    | setTotalUsersCountType
     | SetIsFetchingtACType
 
 export type UsersType = {
@@ -76,32 +76,32 @@ export const UsersReducer = (state: initialStateUsersType = initialState, action
 }
 
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: 'FOLLOW', payload: {userID}
     } as const
 }
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: 'UNFOLLOW', payload: {userID}
     } as const
 }
-export const setUsersAC = (users: UsersType[]) => {
+export const setUsers = (users: UsersType[]) => {
     return {
         type: 'SET-USERS', payload: {users}
     } as const
 }
-export const setCurrentPageAC = (pageNumber: number) => {
+export const setCurrentPage = (pageNumber: number) => {
     return {
         type: 'SET-CURRENT-PAGE', payload: {pageNumber}
     } as const
 }
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT', payload: {totalCount}
     } as const
 }
-export const setIsFetchingAC = (isFetching: boolean) => {
+export const setIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING', payload: {isFetching}
     } as const
