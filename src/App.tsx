@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import {Header} from './Components/Header/Header';
 import {Navbar} from './Components/Navbar/Navbar';
-import {Profile} from './Components/Profile/Profile';
 import {Route, Routes} from 'react-router-dom';
 import { store} from './redux/redux-store';
 import {DialogsContainer} from './Components/Dialogs/DialogsContainer';
 import { UsersContainer1} from './Components/Users/UsersContainer';
+import {ProfileContainer, ProfileContainer1} from './Components/Profile/ProfileContainer';
 
 
 export type MessagesPagePropsType = {
@@ -32,8 +32,8 @@ export const App = () => {
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<DialogsContainer/>}/>
-                    <Route path={'/profile'}
-                           element={<Profile/>}/>
+                    <Route path={'/profile/*'}
+                           element={<ProfileContainer1/>}/>
                     <Route path={'/users'}
                            element={<UsersContainer1/>}/>
                 </Routes>

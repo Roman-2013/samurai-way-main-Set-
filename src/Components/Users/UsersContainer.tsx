@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
 import {
-    
     follow, setCurrentPage, setIsFetching, setTotalUsersCount,
     setUsers,
     unfollow,
@@ -35,7 +34,6 @@ type UsersTypeToMap = MapStateToPropsUsersType & MapDispatchToProps
 export class UsersContainer extends React.Component<UsersTypeToMap, any> {
 
     componentDidMount() {
-
         axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((res) => {
                 this.props.setIsFetching(false)

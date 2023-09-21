@@ -1,3 +1,10 @@
 .descriptionBlock{
     padding: 10px;
 }
+.img{
+    width: 50px;
+}
+.descriptionBlock img{
+    width: 200px;
+    height: 100px;
+}
