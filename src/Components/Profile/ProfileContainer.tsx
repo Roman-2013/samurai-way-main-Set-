@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {Profile} from './Profile';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {
-    ProfilePageActionType,
     ProfileType,
-    setUserProfileAC
+    setUserProfile
 } from '../../redux/profilePage-reducer';
 import {AppRootStateType} from '../../redux/redux-store';
+
+import {
+    useParams,
+} from 'react-router-dom';
+
 
 export type MapStateToPropsType = {
     profile: ProfileType
@@ -15,14 +19,35 @@ export type MapStateToPropsType = {
 type MapDispatchToProps = {
     setUserProfile: (profile: ProfileType) => void
 }
-
 type ProfileContainerType = MapStateToPropsType & MapDispatchToProps
 
+type PropsType =  ProfileContainerType & {
+    match: {
+        params: {
+            userId: string
+        }
+    }
+}
 
-export class ProfileContainer extends React.Component<ProfileContainerType, any> {
+function withRouter(Component: any) {
+    function ComponentWithRouterProp(props: any) {
+        let params = useParams();
+        return (
+            <Component{...props} match={{params}}
+            />
+        );
+    }
+    return ComponentWithRouterProp;
+}
+
+export class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = '2'
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
                 this.props.setUserProfile(res.data)
             })
@@ -37,21 +62,21 @@ export class ProfileContainer extends React.Component<ProfileContainerType, any>
 }
 
 
-
-
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         profile: state.profilePageReducer.profile
     }
 }
 
-let MapDispatchToProps = (dispatch: (action: ProfilePageActionType) => void): MapDispatchToProps => {
-    return {
-        setUserProfile: (profile: ProfileType) => {
-            dispatch(setUserProfileAC(profile))
-        }
-    }
-}
+// let MapDispatchToProps = (dispatch: (action: ProfilePageActionType) => void): MapDispatchToProps => {
+//     return {
+//         setUserProfile: (profile: ProfileType) => {
+//             dispatch(setUserProfile(profile))
+//         }
+//     }
+// }
 
 
-export const ProfileContainer1=  connect(mapStateToProps, MapDispatchToProps)(ProfileContainer)
+let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+
+export const ProfileContainer1 = connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)

@@ -1,12 +1,15 @@
 import React from 'react';
-import {addPostAC, updateNewPostTextAC} from './profilePage-reducer';
+import {addPostAC, setUserProfile, updateNewPostTextAC} from './profilePage-reducer';
 
 
 export type ActionsType =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessagesAC> |
-    ReturnType<typeof sendMessageAC>
+    ReturnType<typeof sendMessageAC>|
+    ReturnType<typeof setUserProfile>
+
+
 
 let initialState = {
     dialogs: [

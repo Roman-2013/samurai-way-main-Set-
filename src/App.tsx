@@ -32,7 +32,7 @@ export const App = () => {
                 <Routes>
                     <Route path={'/dialogs/*'}
                            element={<DialogsContainer/>}/>
-                    <Route path={'/profile/*'}
+                    <Route path={'/profile/:userId'}
                            element={<ProfileContainer1/>}/>
                     <Route path={'/users'}
                            element={<UsersContainer1/>}/>

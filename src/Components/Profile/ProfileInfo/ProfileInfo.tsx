@@ -9,9 +9,7 @@ export const ProfileInfo = (props: MapStateToPropsType) => {
     if (!props.profile.userId) {
          return <Preloader/>
     }
-
     return (
-
         <div>
             <div>
                 <img src="https://cutewallpaper.org/22/wallpaper-for-ps3-hd/1038611218.jpg" alt=""/>

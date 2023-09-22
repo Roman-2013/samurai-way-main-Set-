@@ -2,7 +2,7 @@ import React from 'react';
 import {ProfilePropsType} from '../App';
 import {ActionsType} from './messagesPage-reducer';
 
-export type ProfilePageActionType = ActionsType | ReturnType<typeof setUserProfileAC>
+export type ProfilePageActionType = ActionsType
 
 export type ProfileType = {
     aboutMe: string|null
@@ -65,7 +65,7 @@ export let updateNewPostTextAC = (newText: string) => {
         payload: {newText}
     } as const
 }
-export let setUserProfileAC = (profile: ProfileType) => {
+export let setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE', payload: {profile}
     } as const
